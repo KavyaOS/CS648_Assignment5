@@ -49,16 +49,16 @@ export default class ProductList extends React.Component {
     const query = `mutation productDelete($id: Int!) {
       productDelete(id: $id)
     }`;
-    
-    const data = await graphQLFetch(query, { id })
+
+    const data = await graphQLFetch(query, { id });
 
     if (!data.productDelete) {
-      alert('Product deleted unsuccessfully') // eslint-disable-line no-alert
-      return false
+      alert('Product deleted unsuccessfully'); // eslint-disable-line no-alert
+      return false;
     }
-    alert('Product deleted successfully') // eslint-disable-line no-alert
-    this.loadData()
-    return true
+    alert('Product deleted successfully'); // eslint-disable-line no-alert
+    this.loadData();
+    return true;
   }
 
   render() {

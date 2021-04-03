@@ -13,13 +13,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Page from './Page.jsx';
 
 const element = (
-    <Router>
-        <Page/>
-    </Router>
+  <Router>
+    <Page />
+  </Router>
 );
 
 ReactDOM.render(element, document.getElementById('contents'));
 
-if(module.hot) {
-    module.hot.accept();
+if (module.hot) {
+  module.hot.accept();
 }
