@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import ProductList from './ProductList.jsx';
-import ProductReport from "./ProductReport.jsx";
 import ProductEdit from './ProductEdit.jsx';
 import ProductImage from './ProductImage.jsx';
 
@@ -15,7 +14,6 @@ export default function Contents() {
             <Route path="/products" component={ ProductList } />
             <Route path="/edit/:id" component={ProductEdit} />
             <Route path="/view/:id" component={ProductImage} />
-            <Route path="/report" component={ ProductReport } />
             <Route component = { NotFound } />
         </Switch>
     );
