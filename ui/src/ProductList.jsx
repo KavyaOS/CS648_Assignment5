@@ -52,7 +52,7 @@ export default class ProductList extends React.Component {
 
     const data = await graphQLFetch(query, { id });
 
-    if (!data.productDelete) {
+    if (data.productDelete) {
       alert('Product deleted unsuccessfully'); // eslint-disable-line no-alert
       return false;
     }
