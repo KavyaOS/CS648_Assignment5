@@ -1,22 +1,26 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
-function ProductRow({ product }) {
+const ProductRow = withRouter(({ product, deleteProduct, index, }) => {
     return (
-      <tr>
+      <tr key={index}>
         <td>{product.name}</td>
         <td>
           $
           {product.price}
         </td>
         <td>{product.category}</td>
-        <td><a href={product.imageurl} target="_blank" rel="noopener noreferrer"> View </a></td>
+        <td><Link to={`/view/${product.id}`}> View </Link></td>
+        <td><Link to={`/edit/${product.id}`}>Edit</Link>
+        {' | '}
+        <button type="button" onClick={() => { deleteProduct(product.id); }}>Delete</button></td>
       </tr>
     );
-}
+});
   
-export default function ProductTable({ products }) {
-    const productRows = products.map(product => (
-        <ProductRow key={product.id} product={product} />
+export default function ProductTable({ products, deleteProduct }) {
+    const productRows = products.map((product, index) => (
+        <ProductRow key={product.id} product={product} deleteProduct={deleteProduct} index={index}/>
     ));
     return (
         <table className="bordered-table">
@@ -26,6 +30,7 @@ export default function ProductTable({ products }) {
             <th>Price</th>
             <th>Category</th>
             <th>Image</th>
+            <th>Action</th>
             </tr>
         </thead>
         <tbody>

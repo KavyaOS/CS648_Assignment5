@@ -15,6 +15,13 @@ enum CategoryList {
   Accessories
 }
 
+input ProductUpdateInputs {
+  category: CategoryList
+  name: String!
+  price: Float
+  imageurl: String
+}
+
 input ProductInputs {
   category: CategoryList
   name: String!
@@ -26,8 +33,11 @@ input ProductInputs {
 
 type Query {
   productList: [Product]!
+  product(id: Int!): Product!
 }
 
 type Mutation {
   productAdd(product: ProductInputs!): Product!
+  productUpdate(id: Int!, changes: ProductUpdateInputs!): Product!
+  productDelete(id: Int!): Boolean!
 }

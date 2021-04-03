@@ -2,6 +2,7 @@
 /* eslint no-restricted-globals: "off" */
 
 const express = require('express');
+const path = require('path');
 
 const app = express();
 require('dotenv').config();
@@ -39,6 +40,10 @@ const env = { UI_API_ENDPOINT };
 app.get('/env.js', (req, res) => {
   res.send(`window.ENV = ${JSON.stringify(env)}`);
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public/index.html'));
+})
 
 const port = process.env.UI_SERVER_PORT || 8000;
 app.listen(port, () => {

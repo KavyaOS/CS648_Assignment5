@@ -2,6 +2,7 @@
 /* global db print */
 /* eslint no-restricted-globals: "off" */
 db.products.remove({});
+db.deleted_products.remove({});
 
 const productsDB = [];
 
@@ -17,3 +18,5 @@ db.products.createIndex({ category: 1 });
 db.products.createIndex({ name: 1 });
 db.products.createIndex({ price: 1 });
 db.products.createIndex({ imageurl: 1 });
+
+db.deleted_products.createIndex({ id: 1 }, { unique: true });

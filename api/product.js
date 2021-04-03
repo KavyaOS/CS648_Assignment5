@@ -9,6 +9,27 @@ async function list() {
   return products;
 }
 
+async function update(_, {id, changes })
+{
+  const db = getDb();
+  if(changes.name || changes.category) {
+    const product = await db.collection('products').findOne({ id });
+    Object.assign(product, changes);
+    validate(product);
+  }
+  await db.collection('products').updateOne({ id }, { $set: changes });
+  const savedProduct = await db.collection('products').findOne({ id });
+  return savedProduct;
+}
+
+async function remove(_, { id }) {
+  const db = getDb();
+  const product = await db.collection('products').findOne({ id });
+  if(!product) return false;
+  result = await db.collection('products').removeOne({ id });
+  return false;
+}
+
 function validate(product) {
   const errors = [];
   if (product.category === null) errors.push('Category not selected');
@@ -16,6 +37,12 @@ function validate(product) {
   if (errors.length > 0) {
     throw new UserInputError('Invalid input(s)', { errors });
   }
+}
+
+async function get(_, { id }) {
+  const db = getDb();
+  const product = await db.collection('products').findOne({ id });
+  return product;
 }
 
 async function add(_, { product }) {
@@ -29,4 +56,4 @@ async function add(_, { product }) {
   return savedProduct;
 }
 
-module.exports = { list, add };
+module.exports = { list, add, get, update, remove, };
