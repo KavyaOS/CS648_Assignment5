@@ -35,7 +35,7 @@ async function remove(_, { id }) {
   const product = await db.collection('products').findOne({ id });
   if (!product) return false;
   await db.collection('products').removeOne({ id });
-  return false;
+  return true;
 }
 
 async function get(_, { id }) {
